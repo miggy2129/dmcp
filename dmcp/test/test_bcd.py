@@ -185,10 +185,10 @@ class bcdTestCases(BaseTest):
 
         #Define ground truth test for proximal objective
         objTest = cvx.Minimize(cvx.abs(x1*x2 + x3*x4) 
-                                + cvx.square(cvx.norm(x1 - x1.value, 'fro'))/2/lambd
-                                + cvx.square(cvx.norm(x2 - x2.value, 'fro'))/2/lambd
-                                + cvx.square(cvx.norm(x3 - x3.value, 'fro'))/2/lambd
-                                + cvx.square(cvx.norm(x4 - x4.value, 'fro'))/2/lambd)
+                                + cvx.square(cvx.norm(cvx.vec(x1 - x1.value), 2))/2/lambd
+                                + cvx.square(cvx.norm(cvx.vec(x2 - x2.value), 2))/2/lambd
+                                + cvx.square(cvx.norm(cvx.vec(x3 - x3.value), 2))/2/lambd
+                                + cvx.square(cvx.norm(cvx.vec(x4 - x4.value), 2))/2/lambd)
 
         #Assertion Test
         self.assertAlmostEqual(outputProb.objective.value, objTest.value)
